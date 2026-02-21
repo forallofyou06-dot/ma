@@ -1,12 +1,7 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
+# This workflow is disabled - using static.yml instead for React/Vite build
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -24,6 +19,7 @@ concurrency:
 jobs:
   # Build job
   build:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,6 +36,7 @@ jobs:
 
   # Deployment job
   deploy:
+    if: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
