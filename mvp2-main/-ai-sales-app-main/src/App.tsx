@@ -1,5 +1,6 @@
 ﻿import React, { useState } from 'react';
 import { useAuth } from './hooks/useAuth';
+import Homepage from './components/Homepage/Homepage';
 import Login from './components/Auth/Login';
 import Signup from './components/Auth/Signup';
 import Onboarding from './components/Onboarding/Onboarding';
@@ -20,7 +21,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [showOnboarding, setShowOnboarding] = useState(true);
   const [openCasesHookHelpOnLoad, setOpenCasesHookHelpOnLoad] = useState(false);
-  const [authView, setAuthView] = useState<'login' | 'signup'>('login');
+  const [authView, setAuthView] = useState<'homepage' | 'login' | 'signup'>('homepage');
 
   if (isLoading) {
     return (
@@ -58,6 +59,9 @@ function App() {
   };
 
   if (!isAuthenticated) {
+    if (authView === 'homepage') {
+      return <Homepage onGetStarted={() => setAuthView('login')} />;
+    }
     if (authView === 'signup') {
       return (
         <Signup
@@ -84,6 +88,7 @@ function App() {
     logout();
     setShowOnboarding(true);
     setActiveTab('dashboard');
+    setAuthView('homepage');
   };
 
   if (showOnboarding) {
